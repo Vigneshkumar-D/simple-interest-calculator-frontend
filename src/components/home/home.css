@@ -67,7 +67,7 @@
 }
 .button{
     align-self: flex-end;
-    margin-top: 30px;
+    margin-top: 2%;
 }
 .result{
     font-family: 'Gill Sans', sans-serif;
@@ -81,6 +81,11 @@
     border-radius: 10px;
     background-color: rgb(34, 196, 34);
     /* border: 1px solid black; */
+}
+.error{
+    color: red;
+    font-family: 'Gill Sans', sans-serif;
+    padding: 10px;
 }
 @media screen and (max-width: 767px){
     .home-main-container{

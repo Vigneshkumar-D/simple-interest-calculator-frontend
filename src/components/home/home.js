@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Tag } from "antd";
+import { Button, Form, Input, Tag, message } from "antd";
 import './home.css';
 
 function Home ()  {
@@ -10,6 +10,50 @@ function Home ()  {
   const [error, setError] = useState('');
 
   const onFinish = () => {
+    console.log("git")
+    if (!principal || isNaN(principal) || parseFloat(principal) <= 0) {
+      setError('Please enter a valid principal amount.');
+      return;
+    }
+    if (!rate || isNaN(rate) || parseFloat(rate) <= 0 || parseFloat(rate) > 100) {
+      setError('Please enter a valid interest rate.');
+      return;
+    }
+    if (!time || isNaN(time) || parseFloat(time) <= 0) {
+      setError('Please enter a valid time period.');
+      return;
+    }
+
+    const data= {
+      "principalAmount": principal,
+      "interestRate": rate,
+      "timePeriod": time
+    }
+    const fetchData = async () => {
+      const url = `http://localhost:4000/calculator`
+      try {
+        const response = await fetch(
+         url,
+          {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data) 
+          }
+        );       
+        const jsonData = await response.json();
+        if (!response.ok) {
+          message.error("Failed to Calculate: Error occurred");
+          return;
+        }
+        setSimpleInterest(jsonData);
+      } catch (error) {
+        message.error("Failed to Calculate: Error occurred");
+      }
+
+  }
+  fetchData();
   };
 
   return (
