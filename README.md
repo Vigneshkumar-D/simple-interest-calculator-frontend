@@ -1,7 +1,3 @@
-Certainly! Here's a Git README file based on our conversation:
-
----
-
 # Simple Interest Calculator
 
 ## Overview
